@@ -1,0 +1,87 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: String!
+  name: String!
+  last_name: String!
+  document_type: DocumentType!
+  document_num: Float!
+  phone: Float!
+  email: String!
+  password: String!
+  isActive: Boolean!
+  role: String!
+}
+
+"""
+Document type allowed in the system [Cedula de ciudadania, Pasaporte, Registro civil, Cedula de extranjeria, Libreta militar, Tarjeta de identidad]
+"""
+enum DocumentType {
+  CITIZENSHIP_CARD
+  PASSPORT
+  CIVIL_REGISRTRY
+  FOREIGNER_CARD
+  MILITARY_ID
+  IDENTITY_CARD
+}
+
+type Query {
+  """Find all users"""
+  users: [User!]!
+
+  """Search for a user by a unique ID"""
+  userByID(id: String!): User!
+
+  """Search for a user by a unique Email"""
+  userByEmail(email: String!): User!
+}
+
+type Mutation {
+  """Updates the data of a user by a unique ID"""
+  updateUser(updateUserInput: UpdateUserInput!): User!
+
+  """Inactivate a user"""
+  blockUser(id: String!): User!
+
+  """Reset password user"""
+  resetPassword(resetPassword: String!): User!
+
+  """Reset password user authenticed"""
+  resetPasswordAuth(newPassword: String!): User!
+}
+
+input UpdateUserInput {
+  """User name"""
+  name: String
+
+  """User Last_name"""
+  last_name: String
+
+  """User document type"""
+  document_type: DocumentType
+
+  """User document number"""
+  document_num: Float
+
+  """User Phone"""
+  phone: Float
+
+  """User Email"""
+  email: String
+
+  """
+  User password that must have a minimum length of 6 digits and the password must have an Uppercase, lowercase letter and a number
+  """
+  password: String
+
+  """User roles wich can Administrator, User by default takes the user role"""
+  role: String!
+
+  """Id automatically generated in integer format eg: 1,2,3.."""
+  id: String!
+
+  """User roles wich can Administrator, User by default takes the user role"""
+  isActive: Boolean!
+}
