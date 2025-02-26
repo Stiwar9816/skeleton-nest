@@ -5,10 +5,12 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 // App
 import { AppModule } from './app.module';
+import helmet from 'helmet';
 import { envs } from './config';
 async function bootstrap() {
   const logger = new Logger('Skeleton API');
   const app = await NestFactory.create(AppModule);
+  app.use(helmet());
   app.setGlobalPrefix('api');
   app.useGlobalPipes(
     new ValidationPipe({
